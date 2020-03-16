@@ -22,6 +22,7 @@ class ProductList {
         this.allProducts = [];
         this._fetchProducts();
         this._render();
+        this._renderTotalCost (); // Здесь - вызывается метод вывода общей стоимости товаров каталога
     }
 
     _fetchProducts() {
@@ -41,6 +42,21 @@ class ProductList {
             this.allProducts.push(productObject);
             block.insertAdjacentHTML('beforeend', productObject.render());
         }
+    }
+    // Здесь добавлен метод подсчета суммарной стоимости продуктов каталога
+    _getTotalCostOfProductList () {
+        let totalCost = 0;
+        for (let product of this.goods) {
+            totalCost += product.price;
+        }
+        console.log (totalCost);
+        return totalCost;
+    }
+    // Здесь добавлен метод вывода суммарной стоимости продуктов каталога на экран
+    _renderTotalCost () {
+        const block = document.querySelector('.totalCost');
+        block.insertAdjacentHTML('beforeend', `Общая стоимость каталога ${this._getTotalCostOfProductList ()} руб.`);
+    
     }
 }
 
